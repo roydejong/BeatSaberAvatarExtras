@@ -253,6 +253,7 @@
   </ItemGroup>
     <ItemGroup>
         <Compile Include="Installers\BsaeMenuInstaller.cs" />
+        <Compile Include="Patches\MultiplayerAvatarDataPatcher.cs" />
         <Compile Include="Patches\AvatarRandomizerPatcher.cs" />
         <Compile Include="Patches\AvatarVisualControllerPatcher.cs" />
         <Compile Include="Installers\BsaeAppInstaller.cs" />

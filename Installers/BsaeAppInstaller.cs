@@ -10,6 +10,7 @@ namespace BeatSaberAvatarExtras.Installers
         {
             Container.BindInterfacesAndSelfTo<AvatarRandomizerPatcher>().AsSingle();
             Container.BindInterfacesAndSelfTo<AvatarVisualControllerPatcher>().AsSingle();
+            Container.BindInterfacesAndSelfTo<MultiplayerAvatarDataPatcher>().AsSingle();
         }
     }
 }
