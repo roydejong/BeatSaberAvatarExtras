@@ -33,7 +33,7 @@ namespace BeatSaberAvatarExtras
             zenjector.UseHttpService();
             zenjector.UseSiraSync(SiraSyncServiceType.GitHub, "roydejong", "BeatSaberServerBrowser");
             
-            zenjector.Install<BsaeMenuInstaller>(Location.Menu);
+            zenjector.Install<BsaeAppInstaller>(Location.App);
         }
 
         [OnEnable]

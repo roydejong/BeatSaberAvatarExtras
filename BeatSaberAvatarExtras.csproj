@@ -252,8 +252,9 @@
     </Reference>
   </ItemGroup>
     <ItemGroup>
-        <Compile Include="Core\AvatarVisualControllerPatcher.cs" />
-        <Compile Include="Installers\BsaeMenuInstaller.cs" />
+        <Compile Include="Patches\AvatarRandomizerPatcher.cs" />
+        <Compile Include="Patches\AvatarVisualControllerPatcher.cs" />
+        <Compile Include="Installers\BsaeAppInstaller.cs" />
         <Compile Include="Plugin.cs" />
         <Compile Include="PluginConfig.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
