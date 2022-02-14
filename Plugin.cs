@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using BeatSaberAvatarExtras.Assets;
 using BeatSaberAvatarExtras.Installers;
 using IPA;
 using IPA.Config.Stores;
@@ -41,6 +42,8 @@ namespace BeatSaberAvatarExtras
         public void OnEnable()
         {
             _harmony.PatchAll(Assembly.GetExecutingAssembly());
+            
+            Sprites.Initialize();
         }
 
         [OnDisable]

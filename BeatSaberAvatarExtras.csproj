@@ -252,6 +252,7 @@
     </Reference>
   </ItemGroup>
     <ItemGroup>
+        <Compile Include="Assets\Sprites.cs" />
         <Compile Include="Installers\BsaeMenuInstaller.cs" />
         <Compile Include="Patches\MultiplayerAvatarDataPatcher.cs" />
         <Compile Include="Patches\AvatarRandomizerPatcher.cs" />
@@ -264,8 +265,11 @@
         <Compile Include="UI\CustomAvatarOptionField.cs" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="ATTRIBUTION.md" />
       <Content Include="Directory.Build.props" />
       <Content Include="Directory.Build.targets" />
+      <EmbeddedResource Include="Assets\Sprites\Glasses.png" />
+      <EmbeddedResource Include="Assets\Sprites\Mustache.png" />
       <EmbeddedResource Include="manifest.json" />
     </ItemGroup>
     <ItemGroup>

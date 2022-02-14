@@ -1,4 +1,5 @@
-﻿using BeatSaberAvatarExtras.UI;
+﻿using BeatSaberAvatarExtras.Assets;
+using BeatSaberAvatarExtras.UI;
 using IPA.Utilities;
 using SiraUtil.Affinity;
 using UnityEngine;
@@ -32,6 +33,10 @@ namespace BeatSaberAvatarExtras.Patches
         {
             if (firstActivation)
             {
+                // Set icons
+                _glassesPicker!.Icon!.sprite = Sprites.Glasses;
+                _facialHairPicker!.Icon!.sprite = Sprites.Mustache;
+                
                 // Move edit panel up a bit so the layout is less cramped
                 var editPanel = _editAvatarViewController.transform.Find("EditPanel");
                 (editPanel.transform as RectTransform)!.position += new Vector3(0, .18f, 0);
