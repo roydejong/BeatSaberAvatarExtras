@@ -27,6 +27,9 @@ namespace BeatSaberAvatarExtras.Patches
             facialHairMesh.gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// This patch fixes glasses and facial hair not getting their colors set properly.
+        /// </summary>
         [AffinityPatch(typeof(AvatarVisualController), nameof(AvatarVisualController.UpdateAvatarColors))]
         [AffinityPostfix]
         // ReSharper disable once InconsistentNaming

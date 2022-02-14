@@ -4,12 +4,11 @@ using Zenject;
 namespace BeatSaberAvatarExtras.Installers
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class BsaeAppInstaller : Installer
+    public class BsaeMenuInstaller : Installer
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<AvatarRandomizerPatcher>().AsSingle();
-            Container.BindInterfacesAndSelfTo<AvatarVisualControllerPatcher>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EditAvatarViewControllerPatcher>().AsSingle();
         }
     }
 }

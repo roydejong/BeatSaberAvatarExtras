@@ -31,9 +31,10 @@ namespace BeatSaberAvatarExtras
             zenjector.UseMetadataBinder<Plugin>();
             zenjector.UseLogger(logger);
             zenjector.UseHttpService();
-            zenjector.UseSiraSync(SiraSyncServiceType.GitHub, "roydejong", "BeatSaberServerBrowser");
+            zenjector.UseSiraSync(SiraSyncServiceType.GitHub, "roydejong", "BeatSaberAvatarExtras");
             
             zenjector.Install<BsaeAppInstaller>(Location.App);
+            zenjector.Install<BsaeMenuInstaller>(Location.Menu);
         }
 
         [OnEnable]
