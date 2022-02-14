@@ -1,8 +1,6 @@
 ﻿using IPA.Utilities;
 using SiraUtil.Affinity;
-using SiraUtil.Logging;
 using UnityEngine;
-using Zenject;
 
 namespace BeatSaberAvatarExtras.Patches
 {
@@ -24,20 +22,41 @@ namespace BeatSaberAvatarExtras.Patches
         {
             var glassesMesh = __instance.GetField<MeshFilter, AvatarVisualController>("_glassesMeshFilter");
             var facialHairMesh = __instance.GetField<MeshFilter, AvatarVisualController>("_facialHairMeshFilter");
-            var eyesSprite = __instance.GetField<SpriteRenderer, AvatarVisualController>("_eyesSprite");
-            
+
             glassesMesh.gameObject.SetActive(true);
             facialHairMesh.gameObject.SetActive(true);
         }
-        
+
         [AffinityPatch(typeof(AvatarVisualController), nameof(AvatarVisualController.UpdateAvatarColors))]
-        [AffinityPrefix]
+        [AffinityPostfix]
         // ReSharper disable once InconsistentNaming
-        public void PrefixUpdateAvatarColors(AvatarVisualController __instance)
+        public void PostfixUpdateAvatarColors(AvatarVisualController __instance)
         {
             var avatarData = __instance.GetField<AvatarData, AvatarVisualController>("_avatarData");
+
+            if (avatarData == null)
+                return;
+
+            var glassesMesh = __instance.GetField<MeshFilter, AvatarVisualController>("_glassesMeshFilter")
+                .GetComponent<MeshRenderer>();
+            var facialHairMesh = __instance.GetField<MeshFilter, AvatarVisualController>("_facialHairMeshFilter")
+                .GetComponent<MeshRenderer>();
+
+            if (!glassesMesh.material.name.StartsWith("ExtrasPatchedMat"))
+                glassesMesh.material = CreateColorMaterial();
+
+            glassesMesh.material.color = avatarData.glassesColor;
             
-            // TODO Fix colors...
+            if (!facialHairMesh.material.name.StartsWith("ExtrasPatchedMat"))
+                facialHairMesh.material = CreateColorMaterial();
+                    
+            facialHairMesh.material.color = avatarData.facialHairColor;
         }
+
+        private static Material CreateColorMaterial() => new(Shader.Find("Custom/SimpleLit"))
+        {
+            mainTexture = Texture2D.blackTexture,
+            name = $"ExtrasPatchedMat"
+        };
     }
 }
