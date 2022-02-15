@@ -46,20 +46,30 @@ namespace BeatSaberAvatarExtras.Patches
                 .GetComponent<MeshRenderer>();
 
             if (!glassesMesh.material.name.StartsWith("ExtrasPatchedMat"))
-                glassesMesh.material = CreateColorMaterial();
+                glassesMesh.material = GetSharedColorMaterial();
 
             glassesMesh.material.color = avatarData.glassesColor;
             
             if (!facialHairMesh.material.name.StartsWith("ExtrasPatchedMat"))
-                facialHairMesh.material = CreateColorMaterial();
+                facialHairMesh.material = GetSharedColorMaterial();
                     
             facialHairMesh.material.color = avatarData.facialHairColor;
         }
 
-        private static Material CreateColorMaterial() => new(Shader.Find("Custom/SimpleLit"))
+        private static Material GetSharedColorMaterial()
         {
-            mainTexture = Texture2D.blackTexture,
-            name = $"ExtrasPatchedMat"
-        };
+            if (_sharedMat != null)
+                return _sharedMat;
+            
+            _sharedMat = new Material(Shader.Find("Custom/SimpleLit"))
+            {
+                name = $"ExtrasPatchedMat",
+                mainTexture = Texture2D.whiteTexture,
+                color = Color.white
+            };
+            return _sharedMat;
+        }
+        
+        private static Material? _sharedMat;
     }
 }
