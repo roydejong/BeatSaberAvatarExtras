@@ -14,7 +14,7 @@ Download the mod, and place `BeatSaberAvatarExtras.dll` in your Beat Saber `Plug
 
 ### Requirements
 
-- Beat Saber 1.19 or compatible
+- Beat Saber 1.19, 1.20, or compatible
 - BSIPA
 - SiraUtil
 
