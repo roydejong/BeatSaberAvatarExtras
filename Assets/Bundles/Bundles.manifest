@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 2267995326
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: extras.unitypackage
+      Dependencies: {}

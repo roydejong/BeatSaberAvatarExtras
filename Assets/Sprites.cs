@@ -30,7 +30,7 @@ namespace BeatSaberAvatarExtras.Assets
 
         private static Sprite? LoadSpriteFromResources(string resourcePath, float pixelsPerUnit = 100.0f)
         {
-            var rawData = GetResource(Assembly.GetCallingAssembly(), resourcePath);
+            var rawData = ResourceHelpers.GetResource(Assembly.GetCallingAssembly(), resourcePath);
 
             if (rawData is null)
                 return null;
@@ -42,18 +42,6 @@ namespace BeatSaberAvatarExtras.Assets
 
             sprite.name = resourcePath;
             return sprite;
-        }
-
-        private static byte[]? GetResource(Assembly asm, string resourceName)
-        {
-            var stream = asm.GetManifestResourceStream(resourceName);
-
-            if (stream is null)
-                return null;
-
-            var data = new byte[stream.Length];
-            stream.Read(data, 0, (int) stream.Length);
-            return data;
         }
 
         internal static Sprite? LoadSpriteRaw(byte[] image, float pixelsPerUnit = 100.0f)

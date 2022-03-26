@@ -1,4 +1,5 @@
-﻿using IPA.Utilities;
+﻿using BeatSaberAvatarExtras.Assets;
+using IPA.Utilities;
 using SiraUtil.Affinity;
 using UnityEngine;
 
@@ -28,7 +29,8 @@ namespace BeatSaberAvatarExtras.Patches
         }
 
         /// <summary>
-        /// This patch fixes glasses and facial hair not getting their colors set properly.
+        /// This patch assigns custom materials.
+        /// - Fixes glasses and facial hair not getting their colors set properly.
         /// </summary>
         [AffinityPatch(typeof(AvatarVisualController), nameof(AvatarVisualController.UpdateAvatarColors))]
         [AffinityPostfix]
@@ -40,36 +42,19 @@ namespace BeatSaberAvatarExtras.Patches
             if (avatarData == null)
                 return;
 
+            // Fix glasses and facial hair not getting their colors set properly
             var glassesMesh = __instance.GetField<MeshFilter, AvatarVisualController>("_glassesMeshFilter")
                 .GetComponent<MeshRenderer>();
             var facialHairMesh = __instance.GetField<MeshFilter, AvatarVisualController>("_facialHairMeshFilter")
                 .GetComponent<MeshRenderer>();
 
-            if (!glassesMesh.material.name.StartsWith("ExtrasPatchedMat"))
-                glassesMesh.material = GetSharedColorMaterial();
-
+            if (!glassesMesh.material.name.StartsWith(MaterialFactory.MaterialNamePrefix))
+                glassesMesh.material = MaterialFactory.RainbowMaterial;
             glassesMesh.material.color = avatarData.glassesColor;
             
-            if (!facialHairMesh.material.name.StartsWith("ExtrasPatchedMat"))
-                facialHairMesh.material = GetSharedColorMaterial();
-                    
+            if (!facialHairMesh.material.name.StartsWith(MaterialFactory.MaterialNamePrefix))
+                facialHairMesh.material = MaterialFactory.RainbowMaterial;
             facialHairMesh.material.color = avatarData.facialHairColor;
         }
-
-        private static Material GetSharedColorMaterial()
-        {
-            if (_sharedMat != null)
-                return _sharedMat;
-            
-            _sharedMat = new Material(Shader.Find("Custom/SimpleLit"))
-            {
-                name = $"ExtrasPatchedMat",
-                mainTexture = Texture2D.whiteTexture,
-                color = Color.white
-            };
-            return _sharedMat;
-        }
-        
-        private static Material? _sharedMat;
     }
 }

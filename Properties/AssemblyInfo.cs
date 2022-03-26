@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Beat Saber modification that adds extra customization options for your multiplayer avatar.")]
 
 [assembly: AssemblyCompany("LookAtHippo#0001")]
-[assembly: AssemblyCopyright("Copyright © 2021 Roy de Jong")]
+[assembly: AssemblyCopyright("Copyright © 2022 Roy de Jong")]
 
 [assembly: ComVisible(false)]
 [assembly: Guid("40212FA6-38E0-4062-AE31-6DC6A4A1244C")]
 
 [assembly: AssemblyCulture("en-US")]
-[assembly: AssemblyVersion("1.0.0")]
-[assembly: AssemblyFileVersion("1.0.0")]
+[assembly: AssemblyVersion("1.1.0")]
+[assembly: AssemblyFileVersion("1.1.0")]

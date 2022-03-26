@@ -3,14 +3,14 @@
   "id": "BeatSaberAvatarExtras",
   "name": "BeatSaberAvatarExtras",
   "author": "LookAtHippo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": [
     "Adds extra customization options for your multiplayer avatar."
   ],
-  "gameVersion": "1.19.1",
+  "gameVersion": "1.20.0",
   "dependsOn": {
-    "BSIPA": "^4.2.1",
-    "SiraUtil": "^3.0.3"
+    "BSIPA": "^4.2.2",
+    "SiraUtil": "^3.0.5"
   },
   "links": {
     "project-home": "https://github.com/roydejong/BeatSaberAvatarExtras",

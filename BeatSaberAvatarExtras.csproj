@@ -190,6 +190,9 @@
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
@@ -252,6 +255,9 @@
     </Reference>
   </ItemGroup>
     <ItemGroup>
+        <Compile Include="Assets\BundleLoader.cs" />
+        <Compile Include="Assets\MaterialFactory.cs" />
+        <Compile Include="Assets\ResourceHelpers.cs" />
         <Compile Include="Assets\Sprites.cs" />
         <Compile Include="Installers\BsaeMenuInstaller.cs" />
         <Compile Include="Patches\MultiplayerAvatarDataPatcher.cs" />
@@ -265,6 +271,8 @@
         <Compile Include="UI\CustomAvatarOptionField.cs" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="README.md" />
+      <EmbeddedResource Include="Assets\Bundles\extras.unitypackage" />
       <Content Include="ATTRIBUTION.md" />
       <Content Include="Directory.Build.props" />
       <Content Include="Directory.Build.targets" />

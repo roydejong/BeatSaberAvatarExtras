@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeatSaberAvatarExtras", "BeatSaberAvatarExtras.csproj", "{40212FA6-38E0-4062-AE31-6DC6A4A1244C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "UnityProject\Assembly-CSharp.csproj", "{2106585B-B409-CB68-B5F4-5B9DD210A60F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{40212FA6-38E0-4062-AE31-6DC6A4A1244C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40212FA6-38E0-4062-AE31-6DC6A4A1244C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40212FA6-38E0-4062-AE31-6DC6A4A1244C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2106585B-B409-CB68-B5F4-5B9DD210A60F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2106585B-B409-CB68-B5F4-5B9DD210A60F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2106585B-B409-CB68-B5F4-5B9DD210A60F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2106585B-B409-CB68-B5F4-5B9DD210A60F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
