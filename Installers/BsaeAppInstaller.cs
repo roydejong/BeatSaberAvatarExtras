@@ -1,4 +1,4 @@
-﻿using BeatSaberAvatarExtras.Patches;
+﻿using BeatSaberAvatarExtras.Patches.App;
 using Zenject;
 
 namespace BeatSaberAvatarExtras.Installers

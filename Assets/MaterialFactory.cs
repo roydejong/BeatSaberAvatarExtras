@@ -14,7 +14,7 @@ namespace BeatSaberAvatarExtras.Assets
                 if (_flatColorMaterial != null)
                     return _flatColorMaterial;
 
-                _flatColorMaterial = new Material(Shader.Find("_Shaders/Rainbow"))
+                _flatColorMaterial = new Material(Shader.Find("Custom/SimpleLit"))
                 {
                     name = $"{MaterialNamePrefix}FlatColorMaterial",
                     mainTexture = Texture2D.whiteTexture,

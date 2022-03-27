@@ -1,9 +1,6 @@
-﻿using IPA.Utilities;
-using SiraUtil.Affinity;
-using SiraUtil.Logging;
-using Zenject;
+﻿using SiraUtil.Affinity;
 
-namespace BeatSaberAvatarExtras.Patches
+namespace BeatSaberAvatarExtras.Patches.App
 {
     /// <summary>
     /// Patches the AvatarDataMultiplayerAvatarDataConverter to correctly set glassesId.

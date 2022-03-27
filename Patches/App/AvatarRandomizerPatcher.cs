@@ -1,7 +1,7 @@
 ﻿using DataModels.PlayerAvatar;
 using SiraUtil.Affinity;
 
-namespace BeatSaberAvatarExtras.Patches
+namespace BeatSaberAvatarExtras.Patches.App
 {
     /// <summary>
     /// Patches the avatar "randomize" option to include our extras.

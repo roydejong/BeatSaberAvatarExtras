@@ -13,10 +13,10 @@ namespace BeatSaberAvatarExtras.Assets
         /// Glasses icons created by Freepik - Flaticon
         /// https://www.flaticon.com/free-icons/glasses
         public static Sprite? Glasses;
-        
         /// Glasses icons created by Freepik - Flaticon
         /// https://www.flaticon.com/free-icons/glasses
         public static Sprite? Mustache;
+        public static Sprite? RainbowCircle;
 
         public static bool IsInitialized { get; private set; }
 
@@ -26,6 +26,7 @@ namespace BeatSaberAvatarExtras.Assets
 
             Glasses = LoadSpriteFromResources("BeatSaberAvatarExtras.Assets.Sprites.Glasses.png");
             Mustache = LoadSpriteFromResources("BeatSaberAvatarExtras.Assets.Sprites.Mustache.png");
+            RainbowCircle = LoadSpriteFromResources("BeatSaberAvatarExtras.Assets.Sprites.RainbowCircle.png");
         }
 
         private static Sprite? LoadSpriteFromResources(string resourcePath, float pixelsPerUnit = 100.0f)

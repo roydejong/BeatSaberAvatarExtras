@@ -1,11 +1,10 @@
 ﻿using BeatSaberAvatarExtras.Assets;
 using BeatSaberAvatarExtras.UI;
-using IPA.Utilities;
 using SiraUtil.Affinity;
 using UnityEngine;
 using Zenject;
 
-namespace BeatSaberAvatarExtras.Patches
+namespace BeatSaberAvatarExtras.Patches.Menu
 {
     /// <summary>
     /// Patches the edit avatar view to include extra selection options.
