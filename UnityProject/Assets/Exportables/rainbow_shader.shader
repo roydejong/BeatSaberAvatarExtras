@@ -47,7 +47,6 @@ Shader "_Shaders/Rainbow"
                 o.position = UnityObjectToClipPos(i.vertex);
                 o.texcoord0 = i.texcoord0;
                 o.localPosition = i.vertex.xyz;
-                + fixed3(0.5, 0.5, 0.5);
                 return o;
             }
 

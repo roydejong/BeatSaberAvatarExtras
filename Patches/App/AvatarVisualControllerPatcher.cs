@@ -15,7 +15,7 @@ namespace BeatSaberAvatarExtras.Patches.App
     // ReSharper disable once ClassNeverInstantiated.Global
     public class AvatarVisualControllerPatcher : IAffinity
     {
-        private static Dictionary<string, Material> _originalMaterialsCache = new();
+        private static readonly Dictionary<string, Material> OriginalMaterialsCache = new();
 
         #region Patches
 
@@ -102,8 +102,8 @@ namespace BeatSaberAvatarExtras.Patches.App
 
         private static void ApplyBasePartColor(MeshRenderer mesh, List<Color> applicableColors)
         {
-            if (!_originalMaterialsCache.ContainsKey(mesh.name))
-                _originalMaterialsCache[mesh.name] = mesh.material;
+            if (!OriginalMaterialsCache.ContainsKey(mesh.name))
+                OriginalMaterialsCache[mesh.name] = mesh.material;
             
             if (ApplySpecialOption(mesh, SpecialColorOption.DetectNonDefaultOptionMagically(applicableColors)))
                 return;
@@ -123,7 +123,7 @@ namespace BeatSaberAvatarExtras.Patches.App
 
         private static void RestoreNativeMaterial(MeshRenderer mesh)
         {
-            if (_originalMaterialsCache.TryGetValue(mesh.name, out var originalMat))
+            if (OriginalMaterialsCache.TryGetValue(mesh.name, out var originalMat))
                 if (mesh.material.name != originalMat.name)
                     mesh.material = originalMat;
         }
@@ -137,8 +137,6 @@ namespace BeatSaberAvatarExtras.Patches.App
 
         private static bool ApplySpecialOption(MeshRenderer mesh, SpecialColorOption? option)
         {
-            Plugin.Logger.Error($"ApplySpecialOption - {mesh.name} - {option}");
-            
             if (option == SpecialColorOption.Rainbow)
             {
                 if (mesh.material.name != MaterialFactory.RainbowMaterial.name)
