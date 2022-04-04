@@ -1,5 +1,6 @@
 ﻿using BeatSaberAvatarExtras.Assets;
 using BeatSaberAvatarExtras.Networking;
+using BeatSaberAvatarExtras.Utils;
 using IPA.Utilities;
 using SiraUtil.Affinity;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace BeatSaberAvatarExtras.Patches.Menu
             if (_originalSprite == null)
                 _originalSprite = colorImage.sprite;
 
-            if (color == Magic.MagicRainbowColor)
+            if (color.ApproximatelyEquals(Magic.MagicRainbowColor))
             {
                 colorImage.sprite = Sprites.RainbowCircle;
                 colorImage.color = Color.white;

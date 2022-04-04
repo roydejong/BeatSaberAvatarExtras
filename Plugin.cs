@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using BeatSaberAvatarExtras.Assets;
+﻿using BeatSaberAvatarExtras.Assets;
 using BeatSaberAvatarExtras.Installers;
 using IPA;
 using IPA.Config.Stores;
@@ -13,9 +12,6 @@ namespace BeatSaberAvatarExtras
     // ReSharper disable once ClassNeverInstantiated.Global
     public class Plugin
     {
-        // ReSharper disable once MemberCanBePrivate.Global
-        public const string HarmonyId = "com.hippomade.avatarextras";
-
         internal static IPALogger Logger { get; private set; } = null!;
         internal static PluginConfig Config { get; private set; } = null!;
         
@@ -27,11 +23,8 @@ namespace BeatSaberAvatarExtras
             Logger = logger;
             Config = config.Generated<PluginConfig>();
             
-            _harmony = new HarmonyLib.Harmony(HarmonyId);
-
             zenjector.UseMetadataBinder<Plugin>();
             zenjector.UseLogger(logger);
-            zenjector.UseHttpService();
             zenjector.UseSiraSync(SiraSyncServiceType.GitHub, "roydejong", "BeatSaberAvatarExtras");
             
             zenjector.Install<BsaeAppInstaller>(Location.App);
@@ -41,8 +34,6 @@ namespace BeatSaberAvatarExtras
         [OnEnable]
         public async void OnEnable()
         {
-            _harmony.PatchAll(Assembly.GetExecutingAssembly());
-            
             Sprites.Initialize();
             
             await BundleLoader.EnsureLoaded();
@@ -51,8 +42,6 @@ namespace BeatSaberAvatarExtras
         [OnDisable]
         public void OnDisable()
         {
-            _harmony.UnpatchSelf();
-            
             BundleLoader.Unload();
         }
     }
