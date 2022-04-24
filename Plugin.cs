@@ -14,8 +14,6 @@ namespace BeatSaberAvatarExtras
     {
         internal static IPALogger Logger { get; private set; } = null!;
         internal static PluginConfig Config { get; private set; } = null!;
-        
-        private HarmonyLib.Harmony _harmony = null!;
 
         [Init]
         public void Init(IPALogger logger, Zenjector zenjector, IPA.Config.Config config)

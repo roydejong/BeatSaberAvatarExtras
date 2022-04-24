@@ -116,7 +116,6 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                 // Back up original color if we are swapping Default -> Special
                 if (!wasSpecial && _selectedEditPart is not null)
                 {
-                    Plugin.Logger.Warn($"DEBUG - Store backup color (_selectedEditPart={_selectedEditPart}, selectedColor={selectedColor})");
                     Plugin.Config.StoreBackupColor(selectedColor, _selectedEditPart.Value);
                 }
 
@@ -127,26 +126,14 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                 {
                     var backupColor = Plugin.Config.GetBackupColor(_selectedEditPart.Value);
 
-                    if (backupColor != null)
-                    {
-                        Plugin.Logger.Warn($"DEBUG - Apply from backup color (backupColor={backupColor})");
+                    if (backupColor is not null)
                         setColor = backupColor.Value;
-                    }
-                    else
-                    {
-                        Plugin.Logger.Warn($"DEBUG - Apply from backup color (FAIL - Not in backup)");
-                    }
                 }
                 
-                if (newOption.MagicColor != null)
-                {
-                    Plugin.Logger.Warn($"DEBUG - Apply magic color (_selectedEditPart={_selectedEditPart}, newOption.MagicColor={newOption.MagicColor})");
+                if (newOption.MagicColor is not null)
                     setColor = newOption.MagicColor.Value;
-                }
                 else
-                {
                     setColor.a = 1;
-                }
                 
                 _editColorViewController.SetColor(setColor);
                 _editColorViewController.ChangeColor(setColor);

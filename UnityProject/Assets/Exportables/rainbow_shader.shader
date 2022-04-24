@@ -11,6 +11,7 @@ Shader "_Shaders/Rainbow"
         _Spread ("Spread", Range(0.5, 10.0)) = 3.8
         _Speed ("Speed", Range(-10.0, 10.0)) = 2.4
         _TimeOffset ("TimeOffset", Range(0.0, 6.28318531)) = 0.0
+        _AlphaGlow ("AlphaGlow", Range(0.0, 1.0)) = 0.5
     }
     SubShader
     {
@@ -27,6 +28,7 @@ Shader "_Shaders/Rainbow"
             half _Spread;
             half _Speed;
             half _TimeOffset;
+            fixed _AlphaGlow;
 
             struct vertexInput
             {
@@ -61,7 +63,7 @@ Shader "_Shaders/Rainbow"
                 hue -= time;
                 while (hue < 0.0) hue += 1.0;
                 while (hue > 1.0) hue -= 1.0;
-                fixed4 hsl = fixed4(hue, _Saturation, _Luminosity, 1.0);
+                fixed4 hsl = fixed4(hue, _Saturation, _Luminosity, _AlphaGlow);
                 return HSLtoRGB(hsl);
             }
             ENDCG

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using BeatSaberAvatarExtras.Assets;
 using BeatSaberAvatarExtras.Models;
-using BeatSaberAvatarExtras.Networking;
 using IPA.Utilities;
 using SiraUtil.Affinity;
 using UnityEngine;
@@ -142,7 +141,6 @@ namespace BeatSaberAvatarExtras.Patches.App
                 if (mesh.material.name != MaterialFactory.RainbowMaterial.name)
                 {
                     mesh.material = MaterialFactory.RainbowMaterial;
-                    mesh.material.color = Magic.MagicRainbowColor;
                 }
 
                 return true;
