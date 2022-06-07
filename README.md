@@ -2,8 +2,8 @@
 **Adds extra customization options for your Beat Saber multiplayer avatar.**
 
 - **🥸 New avatar parts**
-  - Unlocks all facial hair options
-  - Unlocks all glasses options
+  - Unlocks facial hair options
+  - Unlocks glasses options
 - **🌈 New color options**
   - Adds an animated rainbow color option
 
@@ -16,7 +16,7 @@ This mod is currently only available for PC.
 
 **✅ [Download the latest release](https://github.com/roydejong/BeatSaberAvatarExtras/releases/latest)**
 
-Download the mod, and place `BeatSaberAvatarExtras.dll` in your Beat Saber `Plugins` directory.
+Download the mod, and place `AvatarExtras.dll` in your Beat Saber `Plugins` directory.
 
 ### Requirements
 
@@ -26,6 +26,10 @@ Beat Saber 1.20 or compatible, with these mods (available on [ModAssistant](http
 - SiraUtil
 - BeatSaberMarkupLanguage (BSML)
 
+## How to use
+The new customization options will simply appear in the avatar editor in your game settings.
+
+To enable/disable rainbow mode for an avatar part, open the color wheel and toggle the option at the bottom.
 
 ## See also
 
