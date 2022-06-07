@@ -1,4 +1,5 @@
 ﻿using BeatSaberAvatarExtras.Assets;
+using BeatSaberAvatarExtras.Networking;
 using BeatSaberAvatarExtras.UI;
 using SiraUtil.Affinity;
 using UnityEngine;
@@ -16,11 +17,14 @@ namespace BeatSaberAvatarExtras.Patches.Menu
         [Inject] private readonly AvatarPartsModel _avatarPartsModel = null!;
         [Inject] private readonly AvatarDataModel _avatarDataModel = null!;
 
+        private PackedExtrasString _extras;
         private CustomAvatarOptionField? _glassesPicker;
         private CustomAvatarOptionField? _facialHairPicker;
 
         public void Initialize()
         {
+            _extras = PackedExtrasString.TryFromAvatarData(_avatarDataModel.avatarData) ?? new PackedExtrasString();
+            
             // Create new fields
             _glassesPicker = CreateCustomField("Glasses", 1);
             _facialHairPicker = CreateCustomField("FacialHair", 2);
@@ -49,13 +53,20 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                 (
                     _avatarPartsModel.glassesCollection,
                     _glassesPicker!.ValueController,
-                    delegate(string s) { _avatarDataModel.avatarData.glassesId = s; },
+                    delegate(string s)
+                    {
+                        _extras.GlassesId = s;
+                        _extras.ApplyTo(_avatarDataModel.avatarData);
+                    },
                     EditAvatarViewController.AvatarEditPart.GlassesModel
                 );
                 _editAvatarViewController.SetupColorButton
                 (
                     _glassesPicker.PrimaryColorController!.button,
-                    delegate(Color color) { _avatarDataModel.avatarData.glassesColor = color; },
+                    delegate(Color color)
+                    {
+                        _avatarDataModel.avatarData.glassesColor = color;
+                    },
                     () => _avatarDataModel.avatarData.glassesColor,
                     EditAvatarViewController.AvatarEditPart.GlassesColor
                 );
@@ -64,13 +75,20 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                 (
                     _avatarPartsModel.facialHairCollection,
                     _facialHairPicker!.ValueController,
-                    delegate(string s) { _avatarDataModel.avatarData.facialHairId = s; },
+                    delegate(string s)
+                    {
+                        _extras.FacialHairId = s;
+                        _extras.ApplyTo(_avatarDataModel.avatarData);
+                    },
                     EditAvatarViewController.AvatarEditPart.FacialHairModel
                 );
                 _editAvatarViewController.SetupColorButton
                 (
                     _facialHairPicker.PrimaryColorController!.button,
-                    delegate(Color color) { _avatarDataModel.avatarData.facialHairColor = color; },
+                    delegate(Color color)
+                    {
+                        _avatarDataModel.avatarData.facialHairColor = color;
+                    },
                     () => _avatarDataModel.avatarData.facialHairColor,
                     EditAvatarViewController.AvatarEditPart.FacialHairColor
                 );
@@ -86,14 +104,14 @@ namespace BeatSaberAvatarExtras.Patches.Menu
             if (_glassesPicker != null)
             {
                 _glassesPicker.ValueController!.SetValue(
-                    _avatarPartsModel.glassesCollection.GetIndexById(_avatarDataModel.avatarData.glassesId));
+                    _avatarPartsModel.glassesCollection.GetIndexById(_extras.GlassesId));
                 _glassesPicker.PrimaryColorController!.SetColor(_avatarDataModel.avatarData.glassesColor);
             }
 
             if (_facialHairPicker != null)
             {
                 _facialHairPicker.ValueController!.SetValue(
-                    _avatarPartsModel.facialHairCollection.GetIndexById(_avatarDataModel.avatarData.facialHairId));
+                    _avatarPartsModel.facialHairCollection.GetIndexById(_extras.FacialHairId));
                 _facialHairPicker.PrimaryColorController!.SetColor(_avatarDataModel.avatarData.facialHairColor);
             }
         }

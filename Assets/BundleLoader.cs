@@ -16,8 +16,6 @@ namespace BeatSaberAvatarExtras.Assets
             if (_bundle != null)
                 return false;
 
-            Plugin.Logger.Info("Loading asset bundle...");
-
             _bundle = await LoadBundleFromResource();
             _rootAsset = null;
 

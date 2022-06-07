@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BeatSaberAvatarExtras.Assets;
 using BeatSaberAvatarExtras.Models;
+using BeatSaberAvatarExtras.Networking;
 using IPA.Utilities;
 using SiraUtil.Affinity;
 using UnityEngine;
@@ -27,11 +28,39 @@ namespace BeatSaberAvatarExtras.Patches.App
         // ReSharper disable once InconsistentNaming
         public void PostfixUpdateAvatarVisual(AvatarData avatarData, AvatarVisualController __instance)
         {
+            var avatarExtras = PackedExtrasString.TryFromString(avatarData.facialHairId);
+            
             var glassesMesh = __instance.GetField<MeshFilter, AvatarVisualController>("_glassesMeshFilter");
             var facialHairMesh = __instance.GetField<MeshFilter, AvatarVisualController>("_facialHairMeshFilter");
+            var avatarPartsModel = __instance.GetField<AvatarPartsModel, AvatarVisualController>("_avatarPartsModel"); 
+            
+            if (avatarExtras?.GlassesId is not null)
+            {
+                var glassesMeshPart =
+                    avatarPartsModel.glassesCollection.GetById(avatarExtras.Value.GlassesId)
+                    ?? avatarPartsModel.glassesCollection.GetDefault();
 
-            glassesMesh.gameObject.SetActive(true);
-            facialHairMesh.gameObject.SetActive(true);
+                glassesMesh.mesh = glassesMeshPart.mesh;
+                glassesMesh.gameObject.SetActive(true);    
+            }
+            else
+            {
+                glassesMesh.gameObject.SetActive(false);
+            }
+
+            if (avatarExtras?.FacialHairId is not null)
+            {
+                var facialHairMeshPart =
+                    avatarPartsModel.facialHairCollection.GetById(avatarExtras.Value.FacialHairId)
+                    ?? avatarPartsModel.facialHairCollection.GetDefault();
+
+                facialHairMesh.mesh = facialHairMeshPart.mesh;
+                facialHairMesh.gameObject.SetActive(true);
+            }
+            else
+            {
+                facialHairMesh.gameObject.SetActive(false);
+            }
         }
 
         /// <summary>

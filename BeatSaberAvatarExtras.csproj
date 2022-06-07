@@ -9,7 +9,7 @@
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>BeatSaberAvatarExtras</RootNamespace>
-        <AssemblyName>BeatSaberAvatarExtras</AssemblyName>
+        <AssemblyName>AvatarExtras</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>9</LangVersion>
@@ -260,6 +260,7 @@
         <Compile Include="Installers\BsaeMenuInstaller.cs" />
         <Compile Include="Models\SpecialColorOption.cs" />
         <Compile Include="Networking\Magic.cs" />
+        <Compile Include="Networking\PackedExtrasString.cs" />
         <Compile Include="Patches\App\AvatarRandomizerPatcher.cs" />
         <Compile Include="Patches\App\AvatarVisualControllerPatcher.cs" />
         <Compile Include="Patches\App\MultiplayerAvatarDataPatcher.cs" />

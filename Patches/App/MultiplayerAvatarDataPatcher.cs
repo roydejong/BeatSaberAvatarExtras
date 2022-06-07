@@ -1,4 +1,6 @@
-﻿using SiraUtil.Affinity;
+﻿using BeatSaberAvatarExtras.Networking;
+using SiraUtil.Affinity;
+using Zenject;
 
 namespace BeatSaberAvatarExtras.Patches.App
 {
@@ -8,18 +10,21 @@ namespace BeatSaberAvatarExtras.Patches.App
     // ReSharper disable once ClassNeverInstantiated.Global
     public class MultiplayerAvatarDataPatcher : IAffinity
     {
+        [Inject] private readonly AvatarDataModel _avatarDataModel = null!;
+        
         /// <summary>
-        /// This patches fixes an issue that prevents "glassesId" from being set correctly on MultiplayerAvatarData.
+        /// This patches stores our PackedExtrasString in the avatar data before it is sent on the network.
         /// </summary>
-        [AffinityPatch(typeof(AvatarDataMultiplayerAvatarDataConverter),
-            nameof(AvatarDataMultiplayerAvatarDataConverter.CreateMultiplayerAvatarData))]
-        [AffinityPostfix]
-        public void PostfixCreateMultiplayerAvatarData(AvatarData avatarData, ref MultiplayerAvatarData __result)
+        [AffinityPatch(typeof(ConnectedPlayerManager), nameof(ConnectedPlayerManager.SetLocalPlayerAvatar))]
+        [AffinityPrefix]
+        public void PrefixSetLocalPlayerAvatar(ref MultiplayerAvatarData multiplayerAvatarData)
         {
-            __result
-                .GetType()
-                .GetField("glassesId")
-                .SetValueDirect(__makeref(__result), avatarData.glassesId);
+            var extras = PackedExtrasString.TryFromAvatarData(_avatarDataModel.avatarData);
+
+            if (extras is not null)
+            {
+                extras.Value.ApplyTo(ref multiplayerAvatarData);
+            }
         }
     }
 }
