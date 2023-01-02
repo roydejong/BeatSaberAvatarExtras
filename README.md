@@ -20,7 +20,7 @@ Download the mod, and place `AvatarExtras.dll` in your Beat Saber `Plugins` dire
 
 ### Requirements
 
-Beat Saber 1.20 or compatible, with these mods (available on [ModAssistant](https://github.com/Assistant/ModAssistant#readme)):
+Beat Saber 1.20 - 1.27 or compatible, with these mods (available on [ModAssistant](https://github.com/Assistant/ModAssistant#readme)):
 
 - BSIPA
 - SiraUtil
