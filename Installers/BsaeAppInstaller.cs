@@ -8,7 +8,6 @@ namespace BeatSaberAvatarExtras.Installers
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<AvatarRandomizerPatcher>().AsSingle();
             Container.BindInterfacesAndSelfTo<AvatarVisualControllerPatcher>().AsSingle();
             Container.BindInterfacesAndSelfTo<MultiplayerAvatarDataPatcher>().AsSingle();
         }

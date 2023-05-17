@@ -1,6 +1,7 @@
 ﻿using BeatSaberAvatarExtras.Assets;
 using BeatSaberAvatarExtras.Networking;
 using BeatSaberAvatarExtras.UI;
+using DataModels.PlayerAvatar;
 using SiraUtil.Affinity;
 using UnityEngine;
 using Zenject;
@@ -96,11 +97,26 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                 _editAvatarViewController.RefreshUi();
             }
         }
+        
+        /// <summary>
+        /// This patch adds glasses and facial hair meshes to the randomization action.
+        /// </summary>
+        [AffinityPatch(typeof(AvatarRandomizer), nameof(AvatarRandomizer.RandomizeModels))]
+        [AffinityPostfix]
+        public void PostfixRandomizeModels(AvatarData avatarData, AvatarPartsModel avatarPartsModel)
+        {
+            // Randomize extras and update avatar data
+            _extras.GlassesId = avatarPartsModel.glassesCollection.GetRandom().id;
+            _extras.FacialHairId = avatarPartsModel.facialHairCollection.GetRandom().id;
+            _extras.ApplyTo(avatarData);
+        }
 
         [AffinityPatch(typeof(EditAvatarViewController), nameof(EditAvatarViewController.RefreshUi))]
         [AffinityPostfix]
         public void PostfixRefreshUi()
         {
+            _extras = PackedExtrasString.TryFromAvatarData(_avatarDataModel.avatarData) ?? new PackedExtrasString();
+            
             if (_glassesPicker != null)
             {
                 _glassesPicker.ValueController!.SetValue(

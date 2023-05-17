@@ -261,7 +261,6 @@
         <Compile Include="Models\SpecialColorOption.cs" />
         <Compile Include="Networking\Magic.cs" />
         <Compile Include="Networking\PackedExtrasString.cs" />
-        <Compile Include="Patches\App\AvatarRandomizerPatcher.cs" />
         <Compile Include="Patches\App\AvatarVisualControllerPatcher.cs" />
         <Compile Include="Patches\App\MultiplayerAvatarDataPatcher.cs" />
         <Compile Include="Patches\Menu\ColorPickerButtonControllerPatcher.cs" />
