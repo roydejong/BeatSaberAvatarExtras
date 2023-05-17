@@ -106,10 +106,12 @@ namespace BeatSaberAvatarExtras.Patches.Menu
         public void PostfixRandomizeModels(AvatarData avatarData, AvatarPartsModel avatarPartsModel)
         {
             // Randomize extras and update avatar data
-            _extras.GlassesId = avatarPartsModel.glassesCollection.GetRandom().id;
-            _extras.FacialHairId = avatarPartsModel.facialHairCollection.GetRandom().id;
+            _extras.GlassesId = CoinFlip() ? avatarPartsModel.glassesCollection.GetRandom().id : null;
+            _extras.FacialHairId = CoinFlip() ? avatarPartsModel.facialHairCollection.GetRandom().id : null;
             _extras.ApplyTo(avatarData);
         }
+
+        private static bool CoinFlip() => Random.Range(0, 2) == 0;
 
         [AffinityPatch(typeof(EditAvatarViewController), nameof(EditAvatarViewController.RefreshUi))]
         [AffinityPostfix]
