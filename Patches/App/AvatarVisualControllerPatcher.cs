@@ -68,7 +68,7 @@ namespace BeatSaberAvatarExtras.Patches.App
         /// - Restores base game materials to undo previously applied special effects
         /// - Applies special color effects (e.g. rainbow) to those parts
         /// </summary>
-        [AffinityPatch(typeof(AvatarVisualController), nameof(AvatarVisualController.UpdateAvatarColors))]
+        [AffinityPatch(typeof(AvatarVisualController), "UpdateAvatarColors")]
         [AffinityPostfix]
         // ReSharper disable once InconsistentNaming
         public void PrefixUpdateAvatarColors(AvatarVisualController __instance) =>
@@ -79,7 +79,7 @@ namespace BeatSaberAvatarExtras.Patches.App
         /// - Fixes glasses and facial hair not getting their colors set properly
         /// - Attaches rainbow material to parts that have the "magic" color
         /// </summary>
-        [AffinityPatch(typeof(AvatarVisualController), nameof(AvatarVisualController.UpdateAvatarColors))]
+        [AffinityPatch(typeof(AvatarVisualController), "UpdateAvatarColors")]
         [AffinityPostfix]
         // ReSharper disable once InconsistentNaming
         public void PostfixUpdateAvatarColors(AvatarVisualController __instance) =>

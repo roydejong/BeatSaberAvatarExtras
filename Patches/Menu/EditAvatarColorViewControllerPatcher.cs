@@ -136,7 +136,7 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                     setColor.a = 1;
                 
                 _editColorViewController.SetColor(setColor);
-                _editColorViewController.ChangeColor(setColor);
+                InvokeChangeColor(setColor);
                 _currentOption = newOption;
             }
         }
@@ -164,5 +164,9 @@ namespace BeatSaberAvatarExtras.Patches.Menu
         }
 
         #endregion
+        
+        private void InvokeChangeColor(Color color) =>
+            _editColorViewController.InvokeMethod<object, EditColorController>("ChangeColor", 
+                color);
     }
 }

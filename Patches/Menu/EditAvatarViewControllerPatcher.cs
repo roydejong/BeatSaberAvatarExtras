@@ -1,10 +1,15 @@
-﻿using BeatSaberAvatarExtras.Assets;
+﻿using System;
+using BeatSaberAvatarExtras.Assets;
 using BeatSaberAvatarExtras.Networking;
 using BeatSaberAvatarExtras.UI;
 using DataModels.PlayerAvatar;
+using IPA.Utilities;
 using SiraUtil.Affinity;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
+using Random = UnityEngine.Random;
+using BeatSaberAvatarExtras.Utils;
 
 namespace BeatSaberAvatarExtras.Patches.Menu
 {
@@ -50,10 +55,10 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                 (randomPanel.transform as RectTransform)!.position += new Vector3(0, -.28f, 0);
 
                 // Initialize custom fields data/bindings
-                _editAvatarViewController.SetupValuePicker<AvatarMeshPartSO>
+                InvokeSetupValuePicker<AvatarMeshPartSO>
                 (
                     _avatarPartsModel.glassesCollection,
-                    _glassesPicker!.ValueController,
+                    _glassesPicker!.ValueController!,
                     delegate(string s)
                     {
                         _extras.GlassesId = s;
@@ -61,7 +66,7 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                     },
                     EditAvatarViewController.AvatarEditPart.GlassesModel
                 );
-                _editAvatarViewController.SetupColorButton
+                InvokeSetupColorButton
                 (
                     _glassesPicker.PrimaryColorController!.button,
                     delegate(Color color)
@@ -72,10 +77,10 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                     EditAvatarViewController.AvatarEditPart.GlassesColor
                 );
 
-                _editAvatarViewController.SetupValuePicker<AvatarMeshPartSO>
+                InvokeSetupValuePicker<AvatarMeshPartSO>
                 (
                     _avatarPartsModel.facialHairCollection,
-                    _facialHairPicker!.ValueController,
+                    _facialHairPicker!.ValueController!,
                     delegate(string s)
                     {
                         _extras.FacialHairId = s;
@@ -83,7 +88,7 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                     },
                     EditAvatarViewController.AvatarEditPart.FacialHairModel
                 );
-                _editAvatarViewController.SetupColorButton
+                InvokeSetupColorButton
                 (
                     _facialHairPicker.PrimaryColorController!.button,
                     delegate(Color color)
@@ -94,7 +99,7 @@ namespace BeatSaberAvatarExtras.Patches.Menu
                     EditAvatarViewController.AvatarEditPart.FacialHairColor
                 );
 
-                _editAvatarViewController.RefreshUi();
+                InvokeRefreshUi();
             }
         }
         
@@ -113,7 +118,7 @@ namespace BeatSaberAvatarExtras.Patches.Menu
 
         private static bool CoinFlip() => Random.Range(0, 2) == 0;
 
-        [AffinityPatch(typeof(EditAvatarViewController), nameof(EditAvatarViewController.RefreshUi))]
+        [AffinityPatch(typeof(EditAvatarViewController), "RefreshUi")]
         [AffinityPostfix]
         public void PostfixRefreshUi()
         {
@@ -136,5 +141,25 @@ namespace BeatSaberAvatarExtras.Patches.Menu
 
         private CustomAvatarOptionField CreateCustomField(string name, int offsetPosition) =>
             CustomAvatarOptionField.Create(_editAvatarViewController.transform.Find("EditPanel"), name, offsetPosition);
+        
+        private void InvokeRefreshUi() =>
+            _editAvatarViewController.InvokeMethod<object, EditAvatarViewController>("RefreshUi");
+        
+        private void InvokeSetupColorButton(Button button,
+            Action<Color> colorSetter,
+            Func<Color> currentColor,
+            EditAvatarViewController.AvatarEditPart avatarEditPart,
+            int uvSegment = 0) =>
+            _editAvatarViewController.InvokeMethod<object, EditAvatarViewController>("SetupColorButton", 
+                button, colorSetter, currentColor, avatarEditPart, uvSegment);
+        
+        private void InvokeSetupValuePicker<T>(
+            AvatarPartCollection<T> partCollection,
+            NamedIntListController valuePicker,
+            Action<string> setIdAction,
+            EditAvatarViewController.AvatarEditPart avatarEditPart)
+            where T : UnityEngine.Object, IAvatarPart =>
+            _editAvatarViewController.InvokeGenericMethod<object, EditAvatarViewController, T>("SetupValuePicker", 
+                partCollection, valuePicker, setIdAction, avatarEditPart);
     }
 }
